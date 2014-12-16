@@ -57,17 +57,17 @@ Installation
 
 Add the following line to your `.bashrc` (or equivalent):
 
-	`source /path/to/vstags.sh`
+	source /path/to/vstags.sh
 
 Create the tags directory:
 
-	`mkdir ~/tags`
+	mkdir ~/tags
 
 (Or change the TAGDIR variable in vstags.sh, and create the according directory)
 
 Run the following to check that you have the necessary tools installed:
 
-	`for cmd in readlink uuidgen find cut uniq; do which $cmd 2>&1 >/dev/null || echo “You don’t have $cmd installed”; done`
+	for cmd in readlink uuidgen find cut uniq; do which $cmd 2>&1 >/dev/null || echo “You don’t have $cmd installed”; done
 
 (If nothing is output, then you are set)
 
