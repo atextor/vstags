@@ -1,5 +1,5 @@
 #!/bin/bash
-# vstags.sh - To use, add the following to your ~/.bashrc: source /path/path/vstags.sh
+# vstags.sh - To use, add the following to your ~/.bashrc: source /path/to/vstags.sh
 # More information at https://github.com/atextor/vstags
 
 TAGDIR=~/tags
