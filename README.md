@@ -111,9 +111,9 @@ Things that are not implemented:
 * Queries with AND or OR predicates. This is left as an exercise for the reader ;-)
 
 Other possible extensions:
-* Add a check in `tag_add to` allow only previously defined tags, to prevent typos.
+* Add a check in `tag_add` to allow only previously defined tags, to prevent typos.
 * “Dynamic folders”, using `find` + `inotifywait`, to automatically fill (and update) a folder with links to all files with certain tags.
-* Transitive tags / subclasses in tags, e.g., by tagging a file `baby`, it is automatically also tagged with `family`, and then automatically also tagged with `private`.
+* Transitive tags / hierarchy of tags, e.g., by tagging a file `baby`, it is automatically also tagged with `family`, and then automatically also tagged with `private`.
 
 Author
 ------
