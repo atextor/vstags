@@ -37,20 +37,29 @@ lrwxrwxrwx 1 user group 67 Dec 16 14:58 fd2cf74c-11cf-4baa-8c51-00f976ab2260;tag
 lrwxrwxrwx 1 user group 63 Dec 16 14:57 fec42204-72c9-4d36-ba6b-fd44ac0e5bc2;tag:work -> /home/user/documents/chart.xls
 ```
 
-* To add a tag, a corresponding symlink is created.
-* To remove a tag, the corresponding symlink is deleted.
+* To add a tag, a corresponding symlink is created:
+
+	ln -s somefile.txt ~/tags/"`uuidgen`;tag:sometag"
+
+* To remove a tag from a file, the corresponding symlink is deleted:
+
+	find -L ~/tags -samefile somefile.txt -name "*tag:sometag" -exec rm -f "{}" \;
+
 * To show all tags for a file, you can use `find` to list all symbolic links from the tag directory that point to that file:
 
-	`find -L ~/tags -samefile somefile.txt | cut -d\; -f2`
+	find -L ~/tags -samefile somefile.txt | cut -d\; -f2
+
 * To list all files that have a certain tag, you can use `readlink` to follow the symbolic links with the right name:
 
-	`find ~/tags -name "*tag:sometag*" -exec readlink -f "{}" \;`
+	find ~/tags -name "*tag:sometag*" -exec readlink -f "{}" \;
+
 * To list all known tags, you just list the links and `uniq` them:
 
-	`find ~/tags -type l -name "*tag:*" | cut -d\: -f2 | sort | uniq`
+	find ~/tags -type l -name "*tag:*" | cut -d\: -f2 | sort | uniq
+
 * And so on, you get the point.
 
-All we need now is a collection of aliases or shell functions for the above commands, and this is provided by vstags.sh.
+All we need now is a collection of aliases or shell functions for the above commands, and this is provided by vstags.sh (with very little polish).
 
 Installation
 ------------
@@ -98,8 +107,13 @@ Todo
 ----
 
 Things that are not implemented:
-* Tracking changing files. Could be implemented using `inotifywait`.
+* Tracking changing/renamed/moved files. Could be implemented using `inotifywait`.
 * Queries with AND or OR predicates. This is left as an exercise for the reader ;-)
+
+Other possible extensions:
+* Add a check in `tag_add to` allow only previously defined tags, to prevent typos.
+* “Dynamic folders”, using `find` + `inotifywait`, to automatically fill (and update) a folder with links to all files with certain tags.
+* Transitive tags / subclasses in tags, e.g., by tagging a file `baby`, it is automatically also tagged with `family`, and then automatically also tagged with `private`.
 
 Author
 ------
